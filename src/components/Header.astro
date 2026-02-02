@@ -1,0 +1,58 @@
+
+<header class="sticky top-4 z-50 flex justify-center">
+  <nav class="nav">
+    <a href="#inicio" data-link>Inicio</a>
+    <a href="#acerca" data-link>Acerca</a>
+    <a href="#proyectos" data-link>Proyectos</a>
+    <a href="#servicios" data-link>Servicios</a>
+
+    <span class="indicator"></span>
+  </nav>
+</header>
+
+<script>
+  // Este código solo se ejecuta en el cliente
+  const sections = document.querySelectorAll("section");
+  const links = document.querySelectorAll("[data-link]");
+  const indicator = document.querySelector(".indicator");
+
+  if (indicator) {
+    function moveIndicator(link) {
+      const linkRect = link.getBoundingClientRect();
+      const navRect = link.parentElement.getBoundingClientRect();
+      
+      const left = linkRect.left - navRect.left;
+      const width = linkRect.width;
+      
+      indicator.style.left = `${left}px`;
+      indicator.style.width = `${width}px`;
+      
+      links.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    }
+
+    moveIndicator(links[0]);
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = [...sections].indexOf(entry.target);
+            if (links[index]) moveIndicator(links[index]);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    sections.forEach(section => observer.observe(section));
+    
+    links.forEach((link, index) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        moveIndicator(link);
+        sections[index]?.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+  }
+</script>
