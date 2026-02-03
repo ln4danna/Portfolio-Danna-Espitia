@@ -1,37 +1,97 @@
-
-<header class="sticky top-4 z-50 flex justify-center">
+<header class="sticky top-4 z-50 flex justify-center px-4">
   <nav class="nav">
-    <a href="#inicio" data-link>Inicio</a>
-    <a href="#acerca" data-link>Acerca</a>
-    <a href="#proyectos" data-link>Proyectos</a>
-    <a href="#servicios" data-link>Servicios</a>
+    <button class="menu-toggle md:hidden" aria-label="Toggle menu">
+      <svg class="hamburger" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M3 12h18M3 6h18M3 18h18" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="close hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
 
-    <span class="indicator"></span>
+    <div class="nav-links">
+      <a href="#inicio" data-link>Inicio</a>
+      <a href="#acerca" data-link>Acerca</a>
+      <a href="#proyectos" data-link>Proyectos</a>
+      <a href="#servicios" data-link>Servicios</a>
+      <span class="indicator"></span>
+    </div>
   </nav>
 </header>
 
 <script>
-  // Este código solo se ejecuta en el cliente
   const sections = document.querySelectorAll("section");
   const links = document.querySelectorAll("[data-link]");
   const indicator = document.querySelector(".indicator");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  const hamburger = document.querySelector(".hamburger");
+  const closeIcon = document.querySelector(".close");
 
+  // Toggle mobile menu
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      hamburger?.classList.toggle("hidden");
+      closeIcon?.classList.toggle("hidden");
+    });
+
+
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          navLinks.classList.remove("active");
+          hamburger?.classList.remove("hidden");
+          closeIcon?.classList.add("hidden");
+        }
+      });
+    });
+
+
+    document.addEventListener("click", (e) => {
+      if (window.innerWidth <= 768 && 
+          navLinks.classList.contains("active") &&
+          !navLinks.contains(e.target) && 
+          !menuToggle.contains(e.target)) {
+        navLinks.classList.remove("active");
+        hamburger?.classList.remove("hidden");
+        closeIcon?.classList.add("hidden");
+      }
+    });
+  }
+
+  // Función para mover el indicador
   if (indicator) {
     function moveIndicator(link) {
-      const linkRect = link.getBoundingClientRect();
-      const navRect = link.parentElement.getBoundingClientRect();
-      
-      const left = linkRect.left - navRect.left;
-      const width = linkRect.width;
-      
-      indicator.style.left = `${left}px`;
-      indicator.style.width = `${width}px`;
+
+      if (window.innerWidth > 768) {
+        const linkRect = link.getBoundingClientRect();
+        const navRect = link.parentElement.getBoundingClientRect();
+        
+        const left = linkRect.left - navRect.left;
+        const width = linkRect.width;
+        
+        indicator.style.left = `${left}px`;
+        indicator.style.width = `${width}px`;
+      }
       
       links.forEach(l => l.classList.remove("active"));
       link.classList.add("active");
     }
 
     moveIndicator(links[0]);
+
+
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const activeLink = document.querySelector("[data-link].active");
+        if (activeLink && window.innerWidth > 768) {
+          moveIndicator(activeLink);
+        }
+      }, 100);
+    });
 
     const observer = new IntersectionObserver(
       entries => {
@@ -47,6 +107,7 @@
 
     sections.forEach(section => observer.observe(section));
     
+
     links.forEach((link, index) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
