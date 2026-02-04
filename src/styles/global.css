@@ -165,7 +165,8 @@
 
 
 .typing-box {
-  display: inline-block;
+  display: block;
+  width: fit-content;
   padding: 1rem 1rem;
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.05);
@@ -173,10 +174,11 @@
   backdrop-filter: blur(6px);
 }
 
+
 /* Texto typing */
 #descripcion {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: rgba(153, 166, 231, 0.793);
   text-align: left;
@@ -187,19 +189,26 @@
   border-right: 3px solid white;
 
   width: 0;
-  animation: typing 4s steps(31) infinite alternate;
+  animation: typing 6s steps(31) infinite;
 }
 
 
 /* Animación */
 @keyframes typing {
-  from {
+  0% {
     width: 0;
   }
-  to {
+  60% {
     width: 31ch;
   }
+  80% {
+    width: 31ch; /* Pausa aquí */
+  }
+  100% {
+    width: 0;
+  }
 }
+
 /* BOTONES REDES SOCIALES */
 .social-buttons {
   display: flex;
@@ -252,7 +261,7 @@
 .retrato{
 
   border-radius: 50%;
-  width: 450px;
+  width: 370px;
   height: 450px;
 
 
@@ -265,7 +274,12 @@
   box-shadow: 0 10px 20px rgba(87, 74, 127, 0.638);
 }
 
-
+@media (max-width: 768px) {
+  .retrato{
+    width: 250px;
+    height: 300px;
+  }
+}
 
 
 .wrapper{

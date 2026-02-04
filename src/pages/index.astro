@@ -17,16 +17,15 @@ import Icon from "astro-iconify";
 
       <!-- TEXTO -->
       <div class="lg:w-1/2">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-between">
   <h1 class="text-[var(--text-main)] text-3xl sm:text-4xl font-bold">
 
-    Hola, soy <span style="color: #878fb5;">Danna</span>
+    ¡Hola, soy <span style="color: #878fb5;">Danna!</span>
   </h1>
-
-  <a
+   <a
     href="Danna-Espitia-Frontend-CV.pdf"
     download
-    class="border border-[var(--text-main)] text-[var(--text-main)] px-5 py-2 rounded-lg text-sm font-semibold
+    class="border border-[var(--text-main)] text-[var(--text-main)] px-3 py-2 justify-center lg:justify-between rounded-lg text-sm font-semibold
            hover:bg-[var(--text-main)] hover:text-[var(--bg-main)]
            transition duration-300"
   >
@@ -34,21 +33,21 @@ import Icon from "astro-iconify";
   </a>  
 </div>
 
-<div class="typing-box mt-3 mb-2">
-  <h2 id="descripcion">
-    Desarrolladora Web - Frontend
-  </h2>
+<div class="mt-3 mb-2 flex justify-center lg:justify-start">
+  <div class="typing-box">
+    <h2 id="descripcion">
+      Desarrolladora Web - Frontend
+    </h2>
+  </div>
 </div>
 
 
-        <h2 class="text-white py-2 text-center lg:text-justify">
+        <h2 class="text-white py-4 pb-5 text-justify">
 
-          Estudiante de Ingeniería de Sistemas con sólida base en programación y un marcado interés por el 
-desarrollo web frontend. Destaco por mi creatividad, capacidad de diseñar interfaces claras y atractivas, y 
-habilidad para transformar ideas en soluciones funcionales. 
+          Estudiante de Ingeniería de Sistemas apasionada por el desarrollo web frontend. Disfruto crear interfaces claras, atractivas y funcionales, combinando programación y creatividad para transformar ideas en experiencias visuales agradables.
         </h2>
 
-<ul class="social-buttons py-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+<ul class="social-buttons sm:flex-row gap-4 py-8 justify-center lg:justify-start">
 
   <!-- LinkedIn -->
   <li>
@@ -121,7 +120,7 @@ habilidad para transformar ideas en soluciones funcionales.
     <img
       src="IMG_9106.jpeg"
       alt="Foto de Danna"
-      class="retrato sm:w-30 sm:h-30 object-cover rounded-3xl"
+      class="retrato  object-cover rounded-3xl"
     />
   </div>
 
@@ -166,11 +165,11 @@ habilidad para transformar ideas en soluciones funcionales.
       <li>ACADEM-IA – Página educativa sobre IA</li>
     </ul>
 
-    <h2 class="text-[var(--text-main)] font-semibold text-lg mb-3">
+    <h2 class="text-[var(--text-main)] font-semibold text-lg mb-3 text-center lg:text-left">
       Habilidades técnicas
     </h2>
 
-<div class="flex flex-wrap gap-3">
+<div class="flex flex-wrap gap-3 justify-center lg:justify-start">
   <span class="px-3 py-1 text-sm rounded-full border border-[var(--text-main)] text-[var(--text-main)]  
          hover:bg-[var(--text-main)] hover:text-[var(--bg-main)]
          transition duration-300">HTML</span>
@@ -466,11 +465,18 @@ habilidad para transformar ideas en soluciones funcionales.
 
     </div>
 
-<footer id="contacto" class="max-w-5xl mx-auto py-16 text-center">
+<div id="contacto" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
   <h2 class="text-[var(--text-main)] text-3xl font-bold mb-4">¡Gracias por llegar hasta aquí!</h2>
   <p class="text-white text-sm mb-6">
     ¿Listo para trabajar juntos? Envíame un mensaje y hablemos sobre tu proyecto.
   </p>
+
+  </div>
   </main>
+
+  <footer class="bg-[var(--bg-footer)] py-6 mt-12">
+    <div class="max-w-5xl mx-auto px-6 text-center text-sm text-white">
+      &copy; {new Date().getFullYear()} Danna Espitia. Todos los derechos reservados.
+    </div>
 </Layout>
 
